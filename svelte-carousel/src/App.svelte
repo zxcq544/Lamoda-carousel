@@ -1,26 +1,28 @@
 <script>
+    //TODO : Lower points with arrows and proper image counter
     import { onMount } from "svelte";
-    let translate_to = -400;
+
     let container_with_images;
-    let image_width = 200;
+    let image_width;
     let transition = 300;
     let is_transitioning = false;
-    let disabled = "disabled";
+    let translate_to;
 
     onMount(function () {
         console.log("container width is ", container_with_images.getBoundingClientRect().width);
         image_width = container_with_images.getBoundingClientRect().width / 2;
-        console.log(image_width);
+        translate_to = -image_width * 2;
+        console.log("image_width", image_width);
+        console.log("translate_to", translate_to);
 
         container_with_images.addEventListener("transitionend", function (ev) {
             if (translate_to == -image_width * 6) {
                 transition = 0;
-                translate_to = -400;
-                // transition = 300;
+                translate_to = -2 * image_width;
             }
             if (translate_to == 0) {
                 transition = 0;
-                translate_to = -800;
+                translate_to = -image_width * 4;
             }
             is_transitioning = false;
         });
@@ -39,41 +41,81 @@
     }
 </script>
 
-<div class="container">
-    <div
-        class="visible"
-        style="--translate-to:{translate_to}px;transition: {transition}ms;"
-        bind:this={container_with_images}
-    >
-        <img src="./img/TH016CUKFYX5_12905264_10_v1_2x.jpg" alt="" />
-        <img src="./img/TH016CUKFYX5_12922545_9_v1_2x.jpg" alt="" />
-        <img src="./img/TH016CUKFYX5_12901513_1_v1.jpg" alt="" />
-        <img src="./img/TH016CUKFYX5_12901514_2_v1.jpg" alt="" />
-        <img src="./img/TH016CUKFYX5_12905264_10_v1_2x.jpg" alt="" />
-        <img src="./img/TH016CUKFYX5_12922545_9_v1_2x.jpg" alt="" />
-        <img src="./img/TH016CUKFYX5_12901513_1_v1.jpg" alt="" />
-        <img src="./img/TH016CUKFYX5_12901514_2_v1.jpg" alt="" />
+<div class="carousel">
+    <button class="left" disabled={is_transitioning ? "disabled" : ""} on:click={translate_left} />
+    <div class="container">
+        <div
+            class="visible"
+            style="--translate-to:{translate_to}px;transition: {transition}ms;"
+            bind:this={container_with_images}
+        >
+            <img src="./img/TH016CUKFYX5_12905264_10_v1_2x.jpg" alt="" />
+            <img src="./img/TH016CUKFYX5_12922545_9_v1_2x.jpg" alt="" />
+            <img src="./img/TH016CUKFYX5_12901513_1_v1.jpg" alt="" />
+            <img src="./img/TH016CUKFYX5_12901514_2_v1.jpg" alt="" />
+            <img src="./img/TH016CUKFYX5_12905264_10_v1_2x.jpg" alt="" />
+            <img src="./img/TH016CUKFYX5_12922545_9_v1_2x.jpg" alt="" />
+            <img src="./img/TH016CUKFYX5_12901513_1_v1.jpg" alt="" />
+            <img src="./img/TH016CUKFYX5_12901514_2_v1.jpg" alt="" />
+        </div>
     </div>
+    <button class="right" disabled={is_transitioning ? "disabled" : ""} on:click={translate_right} />
 </div>
-<button class="left" disabled={is_transitioning ? "disabled" : ""} on:click={translate_left}> left</button>
-<button class="right" disabled={is_transitioning ? "disabled" : ""} on:click={translate_right}>right</button>
 
 <style>
+    .carousel {
+        display: inline-flex;
+        position: relative;
+        align-items: center;
+    }
     :root {
         --translate-to: 0px;
     }
     .container {
-        width: 400px;
+        width: 888px;
         display: flex;
-        border: 1px solid black;
+        /* border: 1px solid black; */
         overflow: hidden;
+        justify-content: space-between;
+        align-items: center;
     }
     .visible {
         width: 100%;
         display: flex;
+        /* position: absolute; */
         transform: translateX(var(--translate-to));
     }
     img {
         width: 50%;
+    }
+    .left,
+    .right {
+        position: absolute;
+        height: 100%;
+        border: 0;
+        width: 50px;
+        cursor: pointer;
+        background-color: transparent;
+        opacity: 0;
+        transition: opacity 300ms ease-out;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 3;
+    }
+    .left {
+        background-image: url("../img/arrow.svg");
+        left: 0;
+    }
+
+    .left:hover,
+    .right:hover {
+        opacity: 1;
+        transition: opacity 100ms ease-in;
+    }
+
+    .right {
+        background-image: url("../img/arrow.svg");
+        transform: rotate(180deg);
+        right: 0;
     }
 </style>
