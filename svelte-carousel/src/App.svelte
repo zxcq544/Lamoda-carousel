@@ -7,6 +7,7 @@
     let transition = 0;
     let is_transitioning = false;
     let translate_to;
+    let current;
     let images_gallery = [
         "./img/TH016CUKFYX5_12901513_1_v1.jpg",
         "./img/TH016CUKFYX5_12901514_2_v1.jpg",
@@ -18,8 +19,10 @@
         console.log("container width is ", container_with_images.getBoundingClientRect().width);
         image_width = container_with_images.getBoundingClientRect().width / 2;
         translate_to = -image_width * 2;
-        console.log("image_width", image_width);
-        console.log("translate_to", translate_to);
+        // console.log("image_width", image_width);
+        // console.log("translate_to", translate_to);
+        current = 0;
+        // console.log("current ", current);
 
         container_with_images.addEventListener("transitionend", function (ev) {
             if (translate_to == -image_width * (images_gallery.length + 2)) {
@@ -34,16 +37,36 @@
         });
     });
 
-    function translate_left() {
+    function translate_right() {
         is_transitioning = true;
         translate_to -= image_width;
         transition = 300;
+        if (current == images_gallery.length - 1) {
+            current = 0;
+        } else {
+            current += 1;
+        }
+        // console.log("current ", current);
     }
 
-    function translate_right() {
+    function translate_left() {
         is_transitioning = true;
         translate_to += image_width;
         transition = 300;
+        if (current == 0) {
+            current = images_gallery.length - 1;
+        } else {
+            current -= 1;
+        }
+        // console.log("current ", current);
+    }
+
+    function handle_dot_click(i) {
+        current = i;
+        translate_to = (-current - 2) * image_width;
+        transition = 300;
+        // console.log("current ", current);
+        // console.log("i ", i);
     }
 </script>
 
@@ -67,25 +90,33 @@
     <button class="right" disabled={is_transitioning ? "disabled" : ""} on:click={translate_right} />
     <div class="dots">
         <button class="dots__left-arrow" disabled={is_transitioning ? "disabled" : ""} on:click={translate_left} />
-        <div class="dots__dot-container">
-            <div class="dots__dot-container__dot" />
-        </div>
-        <div class="dots__dot-container">
-            <div class="dots__dot-container__dot" />
-        </div>
-        <div class="dots__dot-container">
-            <div class="dots__dot-container__dot" />
-        </div>
-        <div class="dots__dot-container">
-            <div class="dots__dot-container__dot" />
-        </div>
+        {#each images_gallery as image_src, i}
+            <div class="dots__dot-container" on:click={() => handle_dot_click(i)}>
+                <div class={i == current ? "dots__dot-container__dot" : "dots__dot-container__dot-small"} />
+            </div>
+        {/each}
 
         <button class="dots__right-arrow" disabled={is_transitioning ? "disabled" : ""} on:click={translate_right} />
     </div>
 </div>
 
 <style>
+    .dots__dot-container__dot-small {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background-color: black;
+        opacity: 0.4;
+    }
+    .dots__dot-container:hover .dots__dot-container__dot-small {
+        width: 8px;
+        height: 8px;
+        /* border-radius: 50%; */
+        /* background-color: black; */
+        opacity: 1;
+    }
     .dots__dot-container {
+        cursor: pointer;
         min-width: 18px;
         display: flex;
         height: 40px;
