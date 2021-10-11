@@ -16,7 +16,7 @@
     ];
 
     onMount(function () {
-        console.log("container width is ", container_with_images.getBoundingClientRect().width);
+        // console.log("container width is ", container_with_images.getBoundingClientRect().width);
         image_width = container_with_images.getBoundingClientRect().width / 2;
         translate_to = -image_width * 2;
         // console.log("image_width", image_width);
