@@ -1,5 +1,4 @@
 <script>
-    //TODO : Lower points with arrows
     import { onMount } from "svelte";
 
     let container_with_images;
