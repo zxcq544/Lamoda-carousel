@@ -143,6 +143,9 @@
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
     }
+    .dots:hover {
+        background-color: hsla(0, 0%, 100%, 0.8);
+    }
     .dots__left-arrow,
     .dots__right-arrow {
         height: 100%;
