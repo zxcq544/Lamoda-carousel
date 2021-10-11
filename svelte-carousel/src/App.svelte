@@ -4,7 +4,7 @@
 
     let container_with_images;
     let image_width;
-    let transition = 300;
+    let transition = 0;
     let is_transitioning = false;
     let translate_to;
 
@@ -60,19 +60,86 @@
         </div>
     </div>
     <button class="right" disabled={is_transitioning ? "disabled" : ""} on:click={translate_right} />
+    <div class="dots">
+        <button class="dots__left-arrow" disabled={is_transitioning ? "disabled" : ""} on:click={translate_left} />
+        <div class="dots__dot-container">
+            <div class="dots__dot-container__dot" />
+        </div>
+        <div class="dots__dot-container">
+            <div class="dots__dot-container__dot" />
+        </div>
+        <div class="dots__dot-container">
+            <div class="dots__dot-container__dot" />
+        </div>
+        <div class="dots__dot-container">
+            <div class="dots__dot-container__dot" />
+        </div>
+
+        <button class="dots__right-arrow" disabled={is_transitioning ? "disabled" : ""} on:click={translate_right} />
+    </div>
 </div>
 
 <style>
+    .dots__dot-container {
+        min-width: 18px;
+        display: flex;
+        height: 40px;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+    }
+    .dots__dot-container__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: black;
+    }
+    .dots {
+        position: absolute;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        height: 40px;
+        background-color: hsla(0, 0%, 100%, 0.4);
+        bottom: 0;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+    }
+    .dots__left-arrow,
+    .dots__right-arrow {
+        height: 100%;
+        border: 0;
+        width: 40px;
+        cursor: pointer;
+        background-color: transparent;
+        opacity: 0.4;
+        transition: opacity 300ms ease-out;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: 3;
+        display: flex;
+    }
+    .dots__left-arrow {
+        background-image: url("../img/arrow.svg");
+    }
+    .dots__right-arrow {
+        background-image: url("../img/arrow.svg");
+        transform: rotate(180deg);
+    }
     .carousel {
         display: inline-flex;
         position: relative;
         align-items: center;
+        justify-content: center;
     }
     :root {
         --translate-to: 0px;
     }
     .container {
-        width: 888px;
+        width: 800px;
         display: flex;
         /* border: 1px solid black; */
         overflow: hidden;
@@ -96,7 +163,7 @@
         width: 50px;
         cursor: pointer;
         background-color: transparent;
-        opacity: 0;
+        opacity: 0.4;
         transition: opacity 300ms ease-out;
         background-repeat: no-repeat;
         background-position: center;
@@ -108,9 +175,11 @@
     }
 
     .left:hover,
-    .right:hover {
+    .right:hover,
+    .dots__left-arrow:hover,
+    .dots__right-arrow:hover {
         opacity: 1;
-        transition: opacity 100ms ease-in;
+        transition: opacity 200ms ease-in;
     }
 
     .right {
