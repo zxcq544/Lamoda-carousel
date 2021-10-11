@@ -87,34 +87,46 @@
         </div>
     </div>
     <button class="right" disabled={is_transitioning ? "disabled" : ""} on:click={translate_right} />
-    <div class="dots">
-        <button class="dots__left-arrow" disabled={is_transitioning ? "disabled" : ""} on:click={translate_left} />
+    <div class="dots-container">
+        <button
+            class="dots-container__left-arrow"
+            disabled={is_transitioning ? "disabled" : ""}
+            on:click={translate_left}
+        />
         {#each images_gallery as image_src, i}
-            <div class="dots__dot-container" on:click={() => handle_dot_click(i)}>
-                <div class={i == current ? "dots__dot-container__dot" : "dots__dot-container__dot-small"} />
+            <div class="dots-container__dot-container" on:click={() => handle_dot_click(i)}>
+                <div
+                    class={i == current
+                        ? "dots-container__dot-container__dot"
+                        : "dots-container__dot-container__dot-small"}
+                />
             </div>
         {/each}
 
-        <button class="dots__right-arrow" disabled={is_transitioning ? "disabled" : ""} on:click={translate_right} />
+        <button
+            class="dots-container__right-arrow"
+            disabled={is_transitioning ? "disabled" : ""}
+            on:click={translate_right}
+        />
     </div>
 </div>
 
 <style>
-    .dots__dot-container__dot-small {
+    .dots-container__dot-container__dot-small {
         width: 4px;
         height: 4px;
         border-radius: 50%;
         background-color: black;
         opacity: 0.4;
     }
-    .dots__dot-container:hover .dots__dot-container__dot-small {
+    .dots-container__dot-container:hover .dots-container__dot-container__dot-small {
         width: 8px;
         height: 8px;
         /* border-radius: 50%; */
         /* background-color: black; */
         opacity: 1;
     }
-    .dots__dot-container {
+    .dots-container__dot-container {
         cursor: pointer;
         min-width: 18px;
         display: flex;
@@ -124,13 +136,13 @@
         align-items: center;
         flex-grow: 1;
     }
-    .dots__dot-container__dot {
+    .dots-container__dot-container__dot {
         width: 8px;
         height: 8px;
         border-radius: 50%;
         background-color: black;
     }
-    .dots {
+    .dots-container {
         position: absolute;
         display: flex;
         align-content: center;
@@ -143,11 +155,11 @@
         border-top-left-radius: 3px;
         border-top-right-radius: 3px;
     }
-    .dots:hover {
+    .dots-container:hover {
         background-color: hsla(0, 0%, 100%, 0.8);
     }
-    .dots__left-arrow,
-    .dots__right-arrow {
+    .dots-container__left-arrow,
+    .dots-container__right-arrow {
         height: 100%;
         border: 0;
         width: 40px;
@@ -160,10 +172,10 @@
         z-index: 3;
         display: flex;
     }
-    .dots__left-arrow {
+    .dots-container__left-arrow {
         background-image: url("../img/arrow.svg");
     }
-    .dots__right-arrow {
+    .dots-container__right-arrow {
         background-image: url("../img/arrow.svg");
         transform: rotate(180deg);
     }
@@ -214,8 +226,8 @@
 
     .left:hover,
     .right:hover,
-    .dots__left-arrow:hover,
-    .dots__right-arrow:hover {
+    .dots-container__left-arrow:hover,
+    .dots-container__right-arrow:hover {
         opacity: 1;
         transition: opacity 200ms ease-in;
     }
