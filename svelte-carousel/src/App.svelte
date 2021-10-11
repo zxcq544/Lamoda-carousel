@@ -1,5 +1,5 @@
 <script>
-    //TODO : Lower points with arrows and proper image counter
+    //TODO : Lower points with arrows
     import { onMount } from "svelte";
 
     let container_with_images;
@@ -7,6 +7,12 @@
     let transition = 0;
     let is_transitioning = false;
     let translate_to;
+    let images_gallery = [
+        "./img/TH016CUKFYX5_12901513_1_v1.jpg",
+        "./img/TH016CUKFYX5_12901514_2_v1.jpg",
+        "./img/TH016CUKFYX5_12905264_10_v1_2x.jpg",
+        "./img/TH016CUKFYX5_12922545_9_v1_2x.jpg",
+    ];
 
     onMount(function () {
         console.log("container width is ", container_with_images.getBoundingClientRect().width);
@@ -16,13 +22,13 @@
         console.log("translate_to", translate_to);
 
         container_with_images.addEventListener("transitionend", function (ev) {
-            if (translate_to == -image_width * 6) {
+            if (translate_to == -image_width * (images_gallery.length + 2)) {
                 transition = 0;
                 translate_to = -2 * image_width;
             }
             if (translate_to == 0) {
                 transition = 0;
-                translate_to = -image_width * 4;
+                translate_to = -image_width * images_gallery.length;
             }
             is_transitioning = false;
         });
@@ -49,14 +55,13 @@
             style="--translate-to:{translate_to}px;transition: {transition}ms;"
             bind:this={container_with_images}
         >
-            <img src="./img/TH016CUKFYX5_12905264_10_v1_2x.jpg" alt="" />
-            <img src="./img/TH016CUKFYX5_12922545_9_v1_2x.jpg" alt="" />
-            <img src="./img/TH016CUKFYX5_12901513_1_v1.jpg" alt="" />
-            <img src="./img/TH016CUKFYX5_12901514_2_v1.jpg" alt="" />
-            <img src="./img/TH016CUKFYX5_12905264_10_v1_2x.jpg" alt="" />
-            <img src="./img/TH016CUKFYX5_12922545_9_v1_2x.jpg" alt="" />
-            <img src="./img/TH016CUKFYX5_12901513_1_v1.jpg" alt="" />
-            <img src="./img/TH016CUKFYX5_12901514_2_v1.jpg" alt="" />
+            <img src={images_gallery[images_gallery.length - 2]} alt="" />
+            <img src={images_gallery[images_gallery.length - 1]} alt="" />
+            {#each images_gallery as image_src}
+                <img src={image_src} alt="" />
+            {/each}
+            <img src={images_gallery[0]} alt="" />
+            <img src={images_gallery[1]} alt="" />
         </div>
     </div>
     <button class="right" disabled={is_transitioning ? "disabled" : ""} on:click={translate_right} />
