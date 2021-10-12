@@ -1,7 +1,7 @@
 # Lamoda slider carousel
 
 This is a simple slider carousel made with  [Svelte](https://svelte.dev) by [Lamoda](https://lamoda.ru) design guides. You can set 2 variables: images_gallery(array of images for slider) and container_width_in_px which is carousel container width in px. 
-```javascript
+```svelte
 <script>
     import Carousel from "./Carousel.svelte"
     let images = [
