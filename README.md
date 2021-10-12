@@ -1,11 +1,11 @@
-# svelte app
+# Lamoda slider carousel
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+This is a simple slider carousel made with  [Svelte](https://svelte.dev) by [Lamoda](https://lamoda.ru) design guides. 
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+To use it in your project:
 
 ```bash
-npx degit sveltejs/template svelte-app
+git clone https://github.com/zxcq544/Lamoda-carousel.git
 cd svelte-app
 ```
 
