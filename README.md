@@ -6,18 +6,14 @@ To use it in your project:
 
 ```bash
 git clone https://github.com/zxcq544/Lamoda-carousel.git
-cd svelte-app
+cd Lamoda-carousel
 ```
 
 *Note that you will need to have [Node.js](https://nodejs.org) installed.*
 
-
-## Get started
-
 Install the dependencies...
 
 ```bash
-cd svelte-app
 npm install
 ```
 
@@ -27,7 +23,7 @@ npm install
 npm run dev
 ```
 
-Navigate to [localhost:5000](http://localhost:5000). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+Navigate to [localhost:5000](http://localhost:5000). You should see your slider running. Edit a component file in `src`, save it, and reload the page to see your changes.
 
 By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
 
