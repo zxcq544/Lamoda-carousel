@@ -66,7 +66,11 @@
 </script>
 
 <div class="carousel">
-    <button class="left" disabled={is_transitioning ? "disabled" : ""} on:click={translate_left} />
+    <button
+        class="left"
+        disabled={is_transitioning}
+        on:click={translate_left}
+    />
     <div class="container" style="width:{container_width_in_px}px;">
         <div
             class="visible"
@@ -82,15 +86,22 @@
             <img src={images_gallery[1]} alt="" />
         </div>
     </div>
-    <button class="right" disabled={is_transitioning ? "disabled" : ""} on:click={translate_right} />
+    <button
+        class="right"
+        disabled={is_transitioning}
+        on:click={translate_right}
+    />
     <div class="dots-container">
         <button
             class="dots-container__left-arrow"
-            disabled={is_transitioning ? "disabled" : ""}
+            disabled={is_transitioning}
             on:click={translate_left}
         />
         {#each images_gallery as image_src, i}
-            <div class="dots-container__dot-container" on:click={() => handle_dot_click(i)}>
+            <div
+                class="dots-container__dot-container"
+                on:click={() => handle_dot_click(i)}
+            >
                 <div
                     class={i == current
                         ? "dots-container__dot-container__dot"
@@ -101,7 +112,7 @@
 
         <button
             class="dots-container__right-arrow"
-            disabled={is_transitioning ? "disabled" : ""}
+            disabled={is_transitioning}
             on:click={translate_right}
         />
     </div>
@@ -115,7 +126,8 @@
         background-color: black;
         opacity: 0.4;
     }
-    .dots-container__dot-container:hover .dots-container__dot-container__dot-small {
+    .dots-container__dot-container:hover
+        .dots-container__dot-container__dot-small {
         width: 8px;
         height: 8px;
         /* border-radius: 50%; */
