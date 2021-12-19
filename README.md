@@ -15,6 +15,14 @@ This is a simple slider carousel made with  [Svelte](https://svelte.dev) by [Lam
 <Carousel images_gallery={images} container_width_in_px={width} />
 ```
 
+
+
+
+https://user-images.githubusercontent.com/5781268/146685442-22afea8e-8e2d-406f-b877-fe7f059f3324.mp4
+
+
+
+
 To use it in your project:
 
 ```bash
